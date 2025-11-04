@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>PAB 테스트 페이지</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #2c3e50; }
+        p { font-size: 16px; }
+        button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+        input { padding: 5px; width: 300px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>PAB 테스트 페이지</h1>
+    <p>이 페이지는 Prisma Access Browser 테스트용으로 만들어졌습니다.</p>
+    <p>클립보드, 다운로드, 업로드, URL 입력 등을 테스트할 수 있습니다.</p>
+
+    <h2>클립보드 테스트</h2>
+    <input type="text" id="clipTestInput" placeholder="이곳에 텍스트 입력 후 복사해보세요">
+    <button onclick="copyText()">Copy Text</button>
+    <button onclick="pasteText()">Paste Text</button>
+    <p id="clipResult"></p>
+
+    <h2>다운로드 테스트</h2>
+    <a href="sample.txt" download>샘플 텍스트 다운로드</a>
+
+    <h2>업로드 테스트</h2>
+    <input type="file" id="uploadTest">
+
+    <script>
+        function copyText() {
+            const text = document.getElementById('clipTestInput').value;
+            navigator.clipboard.writeText(text).then(() => {
+                document.getElementById('clipResult').innerText = "텍스트가 클립보드에 복사되었습니다.";
+            }).catch(err => {
+                document.getElementById('clipResult').innerText = "클립보드 복사 실패: " + err;
+            });
+        }
+
+        function pasteText() {
+            navigator.clipboard.readText().then(text => {
+                document.getElementById('clipResult').innerText = "클립보드 내용: " + text;
+            }).catch(err => {
+                document.getElementById('clipResult').innerText = "클립보드 읽기 실패: " + err;
+            });
+        }
+    </script>
+</body>
+</html>
